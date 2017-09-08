@@ -1,6 +1,6 @@
 import arcade
  
-from models import Ship
+from models import World,Ship
  
 
 class SpaceGameWindow(arcade.Window):
@@ -9,8 +9,9 @@ class SpaceGameWindow(arcade.Window):
  
         arcade.set_background_color(arcade.color.BLACK)
  
-        self.ship = Ship(300,300)
+        
         self.ship_sprite = arcade.Sprite('images/ship.png')
+        self.world = World(width,height)
  
  
     def on_draw(self):
@@ -18,10 +19,8 @@ class SpaceGameWindow(arcade.Window):
         self.ship_sprite.draw()
  
     def update(self, delta):
-        ship = self.ship
- 
-        ship.update(delta)
-        self.ship_sprite.set_position(ship.x, ship.y)
+        self.world.update(delta)
+        self.ship_sprite.set_position(self.world.ship.x, self.world.ship.y)
 
 if __name__ == '__main__':
     window = SpaceGameWindow(600, 600)
